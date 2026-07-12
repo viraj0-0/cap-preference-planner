@@ -10,33 +10,41 @@
 /* Primary loading is via <link> in HTML */
 
 :root {
-  /* ---- Core Palette ---- */
-  --c-bg:              #F1F5F9;
+  /* ---- Core Palette — professional, minimal, one accent ---- */
+  --c-bg:              #F4F5F7;
   --c-surface:         #FFFFFF;
-  --c-surface-2:       #F8FAFC;
-  --c-surface-3:       #F1F5F9;
-  --c-border:          #E2E8F0;
-  --c-border-strong:   #CBD5E1;
+  --c-surface-2:       #F9FAFB;
+  --c-surface-3:       #F3F4F6;
+  --c-border:          #E5E7EB;
+  --c-border-strong:   #D1D5DB;
 
-  --c-text:            #0F172A;
-  --c-text-2:          #334155;
-  --c-text-3:          #64748B;
-  --c-text-4:          #94A3B8;
+  --c-text:            #111827;
+  --c-text-2:          #374151;
+  --c-text-3:          #6B7280;
+  --c-text-4:          #9CA3AF;
 
-  --c-accent:          #6366F1;
-  --c-accent-hover:    #4F46E5;
-  --c-accent-dim:      #818CF8;
-  --c-accent-wash:     #EEF2FF;
-  --c-accent-border:   #C7D2FE;
+  /* Single accent — used sparingly */
+  --c-accent:          #5E6AD2;
+  --c-accent-hover:    #4C59C3;
+  --c-accent-dim:      #8B93E0;
+  --c-accent-wash:     #EEEFFE;
+  --c-accent-border:   #C5C8F0;
 
-  --c-danger:          #EF4444;
-  --c-danger-hover:    #DC2626;
+  /* Secondary accent kept only for tones/badges */
+  --c-violet:          #7C3AED;
+  --c-violet-wash:     #F5F3FF;
+  --c-teal:            #0D9488;
+  --c-teal-wash:       #F0FDFA;
+  --c-teal-border:     #99F6E4;
+
+  --c-danger:          #DC2626;
+  --c-danger-hover:    #B91C1C;
   --c-danger-wash:     #FEF2F2;
   --c-danger-border:   #FECACA;
 
-  --c-success:         #10B981;
+  --c-success:         #059669;
   --c-success-wash:    #ECFDF5;
-  --c-warning:         #F59E0B;
+  --c-warning:         #D97706;
 
   /* ---- Tag Colors ---- */
   --tag-green:         #059669; --tag-green-wash:  #ECFDF5;
@@ -58,30 +66,35 @@
   --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', ui-monospace, monospace;
 
   /* ---- Shadows ---- */
-  --shadow-xs: 0 1px 2px rgba(15,23,42,0.05);
-  --shadow-sm: 0 1px 3px rgba(15,23,42,0.08), 0 1px 2px rgba(15,23,42,0.04);
-  --shadow-md: 0 4px 12px rgba(15,23,42,0.08), 0 2px 4px rgba(15,23,42,0.04);
-  --shadow-lg: 0 10px 28px rgba(15,23,42,0.10), 0 4px 8px rgba(15,23,42,0.05);
-  --shadow-xl: 0 24px 48px rgba(15,23,42,0.14), 0 8px 16px rgba(15,23,42,0.07);
+  --shadow-xs: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.04);
+  --shadow-lg: 0 10px 28px rgba(0,0,0,0.10), 0 4px 8px rgba(0,0,0,0.05);
+  --shadow-xl: 0 20px 40px rgba(0,0,0,0.14), 0 8px 16px rgba(0,0,0,0.06);
 
   /* ---- Radii ---- */
-  --r-xs:   4px;
-  --r-sm:   7px;
-  --r-md:   10px;
-  --r-lg:   14px;
-  --r-xl:   18px;
-  --r-2xl:  24px;
+  --r-xs:   3px;
+  --r-sm:   6px;
+  --r-md:   9px;
+  --r-lg:   13px;
+  --r-xl:   16px;
+  --r-2xl:  20px;
   --r-pill: 999px;
 
   /* ---- Motion ---- */
   --ease:      cubic-bezier(0.16, 1, 0.3, 1);
   --ease-std:  cubic-bezier(0.4, 0, 0.2, 1);
-  --dur-fast:  100ms;
-  --dur-med:   180ms;
-  --dur-slow:  300ms;
+  --dur-fast:  90ms;
+  --dur-med:   160ms;
+  --dur-slow:  280ms;
 
-  --topbar-h: 54px;
-  --gap:      10px;
+  /* ---- Panel layout ---- */
+  --panel-left-w:  262px;
+  --panel-right-w: 296px;
+  --handle-w:        5px;
+
+  --topbar-h: 52px;
+  --gap:       8px;
 }
 
 /* ---- Reduced motion ---- */
@@ -116,6 +129,10 @@ body {
   overflow: hidden;
 }
 
+/* Disable ALL transitions while a panel is being dragged */
+body.is-resizing * { transition: none !important; }
+body.is-resizing { cursor: col-resize !important; }
+
 button {
   font-family: inherit;
   font-size: inherit;
@@ -143,8 +160,8 @@ a { color: var(--c-accent); text-decoration: none; }
   border-radius: var(--r-xs);
 }
 
-/* Scrollbars — very thin and subtle */
-::-webkit-scrollbar { width: 4px; height: 4px; }
+/* Scrollbars */
+::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
   background: var(--c-border-strong);
@@ -286,13 +303,25 @@ a { color: var(--c-accent); text-decoration: none; }
 /* ============================================================
    3-COLUMN APP LAYOUT
    ============================================================ */
+/* ============================================================
+   3-COLUMN APP LAYOUT — CSS Grid with resize handle slots
+   ============================================================ */
 .app-layout {
-  display: flex;
+  display: grid;
+  grid-template-columns:
+    var(--panel-left-w,  262px)
+    var(--handle-w, 5px)
+    1fr
+    var(--handle-w, 5px)
+    var(--panel-right-w, 296px);
   flex: 1 1 0;
   min-height: 0;
-  gap: var(--gap);
+  gap: 0;
   padding: var(--gap);
   overflow: hidden;
+  background: var(--c-bg);
+  /* Columns 2 and 4 are the handles — no gap needed */
+  column-gap: 0;
 }
 
 /* ============================================================
@@ -306,7 +335,39 @@ a { color: var(--c-accent); text-decoration: none; }
   flex-direction: column;
   min-height: 0;
   overflow: hidden;
-  box-shadow: var(--shadow-xs);
+  box-shadow: var(--shadow-sm);
+  /* Panels sit in specific grid columns (1, 3, 5) */
+}
+
+/* ============================================================
+   RESIZE HANDLES
+   ============================================================ */
+.panel-resize-handle {
+  width: var(--handle-w, 5px);
+  background: transparent;
+  cursor: col-resize;
+  position: relative;
+  z-index: 20;
+  transition: background var(--dur-med);
+  border-radius: 4px;
+  margin: var(--gap) 3px;
+  /* Expanded invisible hit area */
+}
+.panel-resize-handle::after {
+  content: '';
+  position: absolute;
+  inset: 0 -6px; /* 6px wider hit zone on each side */
+  cursor: col-resize;
+}
+.panel-resize-handle:hover {
+  background: #4F8EF7;
+  box-shadow: 0 0 0 1.5px rgba(79,142,247,0.25);
+}
+.panel-resize-handle.active,
+body.is-resizing .panel-resize-handle {
+  background: #4F8EF7;
+  width: 6px;
+  box-shadow: 0 0 8px rgba(79,142,247,0.45);
 }
 
 .panel-header {
@@ -342,9 +403,21 @@ a { color: var(--c-accent); text-decoration: none; }
 }
 
 /* ============================================================
-   RANKING PANEL (left, ~260px)
+   RANKING PANEL
    ============================================================ */
-.panel-ranking { width: 262px; flex-shrink: 0; }
+.panel-ranking {
+  /* occupies grid column 1 */
+}
+
+/* Subtle left-border accent on the ranking panel */
+.panel-ranking .panel-header {
+  background: var(--c-surface-2);
+  border-bottom: 1px solid var(--c-border);
+  border-left: 3px solid var(--c-accent);
+  padding-left: 11px;
+}
+
+.panel-ranking .panel-title { color: var(--c-accent); }
 
 .rank-list {
   flex: 1 1 0;
@@ -363,13 +436,13 @@ a { color: var(--c-accent); text-decoration: none; }
 .rank-row:hover { background: var(--c-surface-2); }
 
 .rank-num {
-  width: 40px;
+  width: 38px;
   flex-shrink: 0;
   display: flex;
   align-items: flex-start;
   justify-content: center;
   padding-top: 14px;
-  font-size: 10.5px;
+  font-size: 10px;
   font-weight: 700;
   color: var(--c-text-4);
   font-family: var(--font-mono);
@@ -377,10 +450,13 @@ a { color: var(--c-accent); text-decoration: none; }
   letter-spacing: -0.02em;
   border-right: 1px solid var(--c-border);
   background: var(--c-surface-2);
+  transition: background var(--dur-fast), color var(--dur-fast);
 }
 .rank-row.filled .rank-num {
-  color: var(--c-accent);
-  background: var(--c-accent-wash);
+  background: var(--c-accent);
+  color: white;
+  border-right-color: transparent;
+  font-weight: 800;
 }
 
 .rank-slot {
@@ -445,9 +521,22 @@ a { color: var(--c-accent); text-decoration: none; }
 }
 
 /* ============================================================
-   UNRANKED PANEL (center, flex: 1 — the main workspace)
+   UNRANKED PANEL (center, grid column 3 — 1fr)
    ============================================================ */
-.panel-unranked { flex: 1; min-width: 0; }
+.panel-unranked {
+  min-width: 0;
+  min-height: 0;
+  /* column 3 = 1fr — automatic */
+}
+
+.panel-unranked .panel-header {
+  background: var(--c-surface-2);
+  border-bottom: 1px solid var(--c-border);
+  border-left: 3px solid var(--c-success);
+  padding-left: 11px;
+}
+
+.panel-unranked .panel-title { color: var(--c-text-2); }
 
 .unranked-header { /* uses .panel-header */ }
 
@@ -474,21 +563,24 @@ a { color: var(--c-accent); text-decoration: none; }
 .unranked-list {
   flex: 1 1 0;
   min-height: 0;
-  overflow-y: auto;
+  overflow-y: scroll;  /* always show scroll track so 2nd row is never hidden */
+  overflow-x: hidden;
   padding: 12px;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-/* College groups */
 .college-group {
   background: var(--c-surface);
   border: 1px solid var(--c-border);
   border-radius: var(--r-lg);
-  overflow: hidden;
   transition: box-shadow var(--dur-med) var(--ease);
+  position: relative;
 }
+
+/* Elevate college group that has an open dropdown above subsequent groups */
+.college-group.has-open-menu { z-index: 10; }
 
 .college-group:hover { box-shadow: var(--shadow-sm); }
 
@@ -499,10 +591,13 @@ a { color: var(--c-accent); text-decoration: none; }
   padding: 10px 12px;
   background: var(--c-surface-2);
   border-bottom: 1px solid var(--c-border);
+  border-radius: var(--r-lg) var(--r-lg) 0 0;
   position: sticky;
   top: 0;
   z-index: 3;
   transition: background var(--dur-fast);
+  cursor: pointer;  /* whole header is clickable */
+  user-select: none;
 }
 
 .college-group-header:hover { background: var(--c-surface-3); }
@@ -524,8 +619,8 @@ a { color: var(--c-accent); text-decoration: none; }
 .college-collapse:hover { background: var(--c-border); color: var(--c-text); }
 
 .college-logo {
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -534,7 +629,7 @@ a { color: var(--c-accent); text-decoration: none; }
   background: var(--c-accent-wash);
   color: var(--c-accent);
 }
-.college-logo svg { width: 17px; height: 17px; }
+.college-logo svg { width: 16px; height: 16px; }
 
 .college-summary { min-width: 0; flex: 1; }
 
@@ -676,7 +771,16 @@ a { color: var(--c-accent); text-decoration: none; }
 /* ============================================================
    DETAILS PANEL (right, ~296px)
    ============================================================ */
-.panel-details { width: 296px; flex-shrink: 0; }
+.panel-details {
+  /* occupies grid column 5 */
+}
+
+.panel-details .panel-header {
+  background: var(--c-surface-2);
+  border-bottom: 1px solid var(--c-border);
+  border-left: 3px solid var(--c-border-strong);
+  padding-left: 11px;
+}
 
 .details-body {
   flex: 1 1 0;
@@ -1070,7 +1174,7 @@ a { color: var(--c-accent); text-decoration: none; }
   right: 0;
   top: calc(100% + 4px);
   z-index: 30;
-  min-width: 140px;
+  min-width: 185px;        /* wider — fits "Move to Unranked" without overflow */
   padding: 4px;
   background: var(--c-surface);
   border: 1px solid var(--c-border);
@@ -1088,6 +1192,9 @@ a { color: var(--c-accent); text-decoration: none; }
   font-weight: 500;
   border-radius: var(--r-xs);
   color: var(--c-text);
+  white-space: nowrap;     /* prevent text from wrapping inside menu */
+  overflow: hidden;
+  text-overflow: ellipsis;
   transition: background var(--dur-fast);
 }
 .branch-menu button:hover { background: var(--c-surface-3); }

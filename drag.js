@@ -92,7 +92,8 @@ window.DragDrop = (function () {
 
     if (!rankList || !unrankedList) { scrollTarget = null; return; }
 
-    // Determine which panel column the pointer is currently over by X position.
+    // Match by FULL bounding rect (X and Y) — prevents the ranking list from
+    // being chosen as scroll target when the pointer is over another column.
     scrollTarget = null;
     const candidates = [
       { list: rankList,     panel: rankingPanel },
@@ -101,7 +102,8 @@ window.DragDrop = (function () {
     for (const { list, panel } of candidates) {
       if (!panel) continue;
       const r = panel.getBoundingClientRect();
-      if (e.clientX >= r.left && e.clientX <= r.right) {
+      if (e.clientX >= r.left && e.clientX <= r.right &&
+          e.clientY >= r.top  && e.clientY <= r.bottom) {
         scrollTarget = list;
         break;
       }

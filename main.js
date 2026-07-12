@@ -214,10 +214,18 @@
       if (action === 'edit') openCollegeModal(id);
       if (action === 'add-branch') openBranchModal(null, id);
       if (action === 'menu') {
-        const menu = collegeAction.closest('.college-menu-wrap')?.querySelector('.college-menu');
-        Render.$$('.college-menu.open').forEach(x => { if (x !== menu) x.classList.remove('open'); });
+        const wrap = collegeAction.closest('.college-menu-wrap');
+        const menu = wrap?.querySelector('.college-menu');
+        Render.$$('.college-menu.open').forEach(x => {
+          x.classList.remove('open');
+          x.closest('.college-group')?.classList.remove('has-open-menu');
+        });
         Render.$$('.branch-menu.open').forEach(x => x.classList.remove('open'));
-        menu?.classList.toggle('open');
+        if (menu) {
+          menu.classList.toggle('open');
+          // Elevate the group so the dropdown clears subsequent groups
+          wrap.closest('.college-group')?.classList.toggle('has-open-menu', menu.classList.contains('open'));
+        }
       }
       if (action === 'duplicate') { State.duplicateCollege(id); toast('College and its branches duplicated'); }
       if (action === 'delete') {
@@ -225,6 +233,12 @@
         showConfirm('Delete college?', `This removes "${c.name}" and all of its branches, including any rankings.`, () => { State.deleteCollege(id); toast('College deleted'); });
       }
       return;
+    }
+    // Click anywhere on college-group-header (outside action buttons) → toggle collapse
+    const header = e.target.closest('.college-group-header');
+    if (header && !e.target.closest('.college-actions')) {
+      const id = header.closest('.college-group')?.dataset.collegeId;
+      if (id) { State.toggleCollegeCollapsed(id); return; }
     }
     const branchAction = e.target.closest('[data-branch-action]');
     if (branchAction) {

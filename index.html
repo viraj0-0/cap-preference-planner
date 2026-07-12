@@ -76,6 +76,9 @@
     </div>
   </aside>
 
+  <!-- RESIZE HANDLE: left ↔ center -->
+  <div class="panel-resize-handle" id="handleLeft" data-handle="left" title="Drag to resize · Double-click to reset"></div>
+
   <!-- CENTER: Unranked Branches (main workspace) -->
   <section class="panel panel-unranked unranked-section" id="unrankedPanel">
     <div class="panel-header unranked-header">
@@ -94,6 +97,9 @@
     </div>
     <div class="unranked-list" id="unrankedList"></div>
   </section>
+
+  <!-- RESIZE HANDLE: center ↔ right -->
+  <div class="panel-resize-handle" id="handleRight" data-handle="right" title="Drag to resize · Double-click to reset"></div>
 
   <!-- RIGHT: Branch Details -->
   <aside class="panel panel-details" id="detailsPanel">
@@ -294,6 +300,7 @@ VJTI,Computer Engineering,98.7,4200,GOPENS,"></textarea>
 <script src="state.js"></script>
 <script src="render.js"></script>
 <script src="drag.js"></script>
+<script src="panels.js"></script>
 <script src="main.js"></script>
 </body>
 </html>
