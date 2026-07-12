@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAP Preference Planner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============================================================
+     TOP BAR
+     ============================================================ -->
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-logo">V</div>
+    <div class="brand-text">
+      <div class="brand-name">Viraj naam toh suna he hoga 👽</div>
+      <div class="brand-sub">CAP · DSE Planner</div>
+    </div>
+  </div>
+
+  <div class="topbar-search">
+    <input type="text" id="searchInput" placeholder="Search college, branch, notes, cutoff…" autocomplete="off">
+  </div>
+
+  <div class="topbar-actions">
+    <button class="tbtn" id="filterBtn" title="Filters">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
+      <span class="label">Filters</span>
+    </button>
+    <button class="tbtn" id="favFilterToggle" title="Show favorites only">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <span class="label">Favorites</span>
+    </button>
+    <button class="tbtn" id="compareToggle" title="Compare branches">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="10" width="6" height="10" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><rect x="9" y="14" width="0" height="0"/></svg>
+      <span class="label">Compare</span>
+    </button>
+    <button class="tbtn" id="statsBtn" title="Statistics">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="20" x2="6" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="18" y1="20" x2="18" y2="14"/></svg>
+      <span class="label">Stats</span>
+    </button>
+    <div class="tbtn-divider"></div>
+    <button class="tbtn" id="exportBtn" title="Export">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <span class="label">Export</span>
+    </button>
+    <button class="tbtn" id="importBtn" title="Import">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      <span class="label">Import</span>
+    </button>
+    <button class="tbtn tbtn-icon" id="settingsBtn" title="Settings">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- ============================================================
+     3-COLUMN MAIN LAYOUT
+     ============================================================ -->
+<main class="app-layout">
+
+  <!-- LEFT: Preference Ranking -->
+  <aside class="panel panel-ranking" id="rankingPanel">
+    <div class="panel-header">
+      <h2 class="panel-title">Preference Ranking</h2>
+      <span class="count-pill" id="rankedCountPill">0 ranked</span>
+    </div>
+    <div class="rank-list" id="rankList"></div>
+    <div class="panel-footer">
+      <button class="add-rank-btn" id="addRankSlotsBtn">+ Add 20 more rank slots</button>
+    </div>
+  </aside>
+
+  <!-- CENTER: Unranked Branches (main workspace) -->
+  <section class="panel panel-unranked unranked-section" id="unrankedPanel">
+    <div class="panel-header unranked-header">
+      <h2 class="panel-title">Unranked Branches</h2>
+      <div class="unranked-controls">
+        <select class="select-mini" id="sortSelect">
+          <option value="manual">Sort: Manual</option>
+          <option value="alpha">Sort: Alphabetical</option>
+          <option value="cutoff">Sort: Cutoff</option>
+          <option value="merit">Sort: Merit No.</option>
+          <option value="college">Sort: College</option>
+          <option value="recent">Sort: Recently added</option>
+        </select>
+        <span class="count-pill" id="unrankedCountPill">0 items</span>
+      </div>
+    </div>
+    <div class="unranked-list" id="unrankedList"></div>
+  </section>
+
+  <!-- RIGHT: Branch Details -->
+  <aside class="panel panel-details" id="detailsPanel">
+    <div class="panel-header">
+      <h2 class="panel-title">Branch Details</h2>
+    </div>
+    <div class="details-body" id="detailsBody">
+      <div class="details-empty">Select a branch card to view and edit its full details here.</div>
+    </div>
+  </aside>
+
+</main>
+
+<button class="fab" id="addCollegeFab" title="Add college (N)">+</button>
+
+<!-- ============================================================
+     MODAL OVERLAY
+     ============================================================ -->
+<div class="modal-overlay" id="modalOverlay">
+
+  <!-- Add / Edit College -->
+  <div class="modal" id="collegeModal">
+    <div class="modal-header"><h3 id="collegeModalTitle">Add College</h3><button class="modal-close" data-close>✕</button></div>
+    <div class="modal-body">
+      <div class="field"><label>College Name *</label><input type="text" id="cf-name" placeholder="e.g. VJTI Mumbai"></div>
+      <div class="field-row">
+        <div class="field"><label>Location</label><input type="text" id="cf-location" placeholder="e.g. Matunga, Mumbai"></div>
+        <div class="field"><label>University</label><input type="text" id="cf-university" placeholder="e.g. Mumbai University"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>College Type</label>
+          <select id="cf-type"><option>Government</option><option>Aided</option><option>Private</option></select>
+        </div>
+        <div class="field"><label>Autonomous</label>
+          <select id="cf-autonomous"><option value="false">No</option><option value="true">Yes</option></select>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>NAAC Grade</label><input type="text" id="cf-naac" placeholder="e.g. A++"></div>
+        <div class="field"><label>Website</label><input type="text" id="cf-website" placeholder="https://…"></div>
+      </div>
+      <div class="field"><label>Notes</label><textarea id="cf-notes" placeholder="Optional notes about this college"></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-danger" id="cf-delete" style="display:none;">Delete College</button>
+      <button class="btn btn-secondary" data-close>Cancel</button>
+      <button class="btn btn-primary" id="cf-save">Save College</button>
+    </div>
+  </div>
+
+  <!-- Add / Edit Branch -->
+  <div class="modal" id="branchModal">
+    <div class="modal-header"><h3 id="branchModalTitle">Add Branch</h3><button class="modal-close" data-close>✕</button></div>
+    <div class="modal-body">
+      <div class="field"><label>College *</label><select id="bf-college"></select></div>
+      <div class="field"><label>Branch Name *</label><input type="text" id="bf-name" placeholder="e.g. Computer Engineering"></div>
+      <div class="field-row">
+        <div class="field"><label>Last Year Cutoff (%ile)</label><input type="number" step="0.01" id="bf-cutoff" placeholder="e.g. 98.75"></div>
+        <div class="field"><label>Last Year Merit No.</label><input type="number" id="bf-merit" placeholder="e.g. 4521"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Category</label><input type="text" id="bf-category" placeholder="e.g. GOPENS"></div>
+      </div>
+      <div class="field"><label>Color Label</label>
+        <div class="color-picker" id="bf-colorpicker"></div>
+      </div>
+      <div class="field"><label>Notes</label><textarea id="bf-notes" placeholder="Any notes about this branch"></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-danger" id="bf-delete" style="display:none;">Delete Branch</button>
+      <button class="btn btn-secondary" data-close>Cancel</button>
+      <button class="btn btn-primary" id="bf-save">Save Branch</button>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div class="modal" id="filterModal">
+    <div class="modal-header"><h3>Filters</h3><button class="modal-close" data-close>✕</button></div>
+    <div class="modal-body" id="filterModalBody">
+      <div class="filter-group">
+        <div class="filter-group-title">College Type</div>
+        <div class="chip-row" id="filter-type"></div>
+      </div>
+      <div class="filter-group">
+        <div class="filter-group-title">Autonomous</div>
+        <div class="chip-row" id="filter-autonomous"></div>
+      </div>
+      <div class="filter-group">
+        <div class="filter-group-title">University</div>
+        <div class="chip-row" id="filter-university"></div>
+      </div>
+      <div class="filter-group">
+        <div class="filter-group-title">Category</div>
+        <div class="chip-row" id="filter-category"></div>
+      </div>
+      <div class="filter-group">
+        <div class="filter-group-title">Branch</div>
+        <div class="chip-row" id="filter-branch"></div>
+      </div>
+      <div class="filter-group">
+        <div class="filter-group-title">Cutoff Range (%ile)</div>
+        <div class="field-row">
+          <input type="number" step="0.01" id="filter-cutoff-min" placeholder="Min">
+          <input type="number" step="0.01" id="filter-cutoff-max" placeholder="Max">
+        </div>
+      </div>
+      <div class="filter-group">
+        <div class="filter-group-title">Merit Number Range</div>
+        <div class="field-row">
+          <input type="number" id="filter-merit-min" placeholder="Min">
+          <input type="number" id="filter-merit-max" placeholder="Max">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" id="filter-clear">Clear All</button>
+      <button class="btn btn-primary" data-close>Apply</button>
+    </div>
+  </div>
+
+  <!-- Statistics -->
+  <div class="modal" id="statsModal">
+    <div class="modal-header"><h3>Statistics</h3><button class="modal-close" data-close>✕</button></div>
+    <div class="modal-body">
+      <div class="stats-grid" id="statsGrid"></div>
+    </div>
+  </div>
+
+  <!-- Settings -->
+  <div class="modal" id="settingsModal">
+    <div class="modal-header"><h3>Settings</h3><button class="modal-close" data-close>✕</button></div>
+    <div class="modal-body">
+      <div class="settings-row">
+        <div><div class="label">Compact rows</div><div class="desc">Tighter card spacing for dense lists</div></div>
+        <div class="switch" id="set-compact" data-setting="compactDensity"></div>
+      </div>
+      <div class="settings-row">
+        <div><div class="label">Auto-expand college groups</div><div class="desc">Keep unranked cards grouped and expanded</div></div>
+        <div class="switch" id="set-autoexpand" data-setting="autoExpand"></div>
+      </div>
+      <div class="settings-row">
+        <div><div class="label">Backup reminders</div><div class="desc">Gentle nudge to export a JSON backup weekly</div></div>
+        <div class="switch" id="set-backup" data-setting="backupReminder"></div>
+      </div>
+      <div class="settings-row">
+        <div><div class="label">Reset application</div><div class="desc">Erase all colleges, branches and rankings</div></div>
+        <button class="btn btn-danger" id="set-reset">Reset Everything</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Compare -->
+  <div class="modal wide" id="compareModal">
+    <div class="modal-header"><h3>Compare Branches</h3><button class="modal-close" data-close>✕</button></div>
+    <div class="modal-body" id="compareBody">
+      <p class="empty-hint">Select 2–4 branch cards (click while Compare mode is on) to compare them here.</p>
+    </div>
+  </div>
+
+  <!-- Import -->
+  <div class="modal" id="importModal">
+    <div class="modal-header"><h3>Import Data</h3><button class="modal-close" data-close>✕</button></div>
+    <div class="modal-body">
+      <div class="field">
+        <label>Restore from JSON backup</label>
+        <input type="file" id="import-json-file" accept="application/json">
+        <div class="field-hint">Replaces current data after confirmation.</div>
+      </div>
+      <div class="field">
+        <label>Or paste CSV / Excel table (Bulk Import Branches)</label>
+        <textarea class="import-textarea" id="import-csv-text" placeholder="College,Branch,Cutoff,Merit,Category,Notes
+VJTI,Computer Engineering,98.7,4200,GOPENS,"></textarea>
+        <div class="field-hint">First row = headers. Missing colleges are created automatically.</div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" data-close>Cancel</button>
+      <button class="btn btn-primary" id="import-csv-btn">Import CSV Text</button>
+    </div>
+  </div>
+
+  <!-- Generic confirm -->
+  <div class="modal" id="confirmModal">
+    <div class="modal-header"><h3 id="confirmTitle">Are you sure?</h3><button class="modal-close" data-close>✕</button></div>
+    <div class="modal-body"><p id="confirmMessage" style="font-size:14px; color:var(--c-text-2); margin:0; line-height:1.6;"></p></div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" data-close>Cancel</button>
+      <button class="btn btn-danger" id="confirmActionBtn">Confirm</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="storage.js"></script>
+<script src="utils.js"></script>
+<script src="state.js"></script>
+<script src="render.js"></script>
+<script src="drag.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
