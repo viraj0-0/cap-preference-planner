@@ -35,6 +35,8 @@ window.PanelResize = (function () {
 
   /* ---- Drag start ---- */
   function onMouseDown (e) {
+    if (window.innerWidth < 992) return; // Disable drag handles when stacked
+    
     e.preventDefault();
     activeHandle = e.currentTarget.dataset.handle;
     startX      = e.clientX;

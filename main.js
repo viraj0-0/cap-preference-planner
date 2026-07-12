@@ -274,7 +274,29 @@
         if (State.data.ui.compareIds.length >= 2) { Render.renderCompare(); openModal('compareModal'); }
       } else {
         State.setSelectedBranch(id);
+        // Show details slide-over on mobile/tablet
+        if (window.innerWidth < 1200) {
+          document.body.classList.add('show-details');
+        }
       }
+    }
+    
+    // Mobile Tabs
+    const tabBtn = e.target.closest('.tab-btn');
+    if (tabBtn) {
+      const tab = tabBtn.dataset.tab;
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.toggle('active', btn === tabBtn));
+      if (tab === 'ranking') {
+        document.body.classList.add('show-ranking');
+      } else {
+        document.body.classList.remove('show-ranking');
+      }
+    }
+    
+    // Mobile Close Details Button
+    const closeBtn = e.target.closest('.mobile-close-btn');
+    if (closeBtn) {
+      document.body.classList.remove('show-details');
     }
   });
 
